@@ -12,6 +12,7 @@ URL: 		http://rezound.sourceforge.net/
 Source0: 	http://prdownloads.sourceforge.net/rezound/%{name}-%{version}beta.tar.bz2
 Patch:		rezound-0.12.2beta-64bit.patch
 Patch1:		rezound-flac-1.2.patch
+BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	libvorbis-devel 
 BuildRequires:  fox1.6-devel
 BuildRequires:  libaudiofile-devel flex
