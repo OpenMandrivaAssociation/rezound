@@ -6,12 +6,16 @@ Summary:	Audio Editing Package
 Name:		%{name}
 Version: 	%{version}
 Release: 	%{release}
-License: 	GPL
+License: 	GPLv2+
 Group: 		Sound
 URL: 		http://rezound.sourceforge.net/
 Source0: 	http://prdownloads.sourceforge.net/rezound/%{name}-%{version}beta.tar.bz2
 Patch:		rezound-0.12.2beta-64bit.patch
 Patch1:		rezound-flac-1.2.patch
+# patch from Debian
+Patch2:		11_gcc_4.3.patch
+#
+Patch3:		rezound-0.12.3beta-fix-gcc44.patch
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	libvorbis-devel 
 BuildRequires:  fox1.6-devel
@@ -32,6 +36,8 @@ rm -rf $RPM_BUILD_ROOT
 %setup -q -n %name-%{version}beta
 %patch -p1
 %patch1 -p1
+%patch2 -p1 -b .gcc43
+%patch3 -p1 -b .gcc44
 
 %build
 %configure2_5x --disable-portaudio
