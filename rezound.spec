@@ -1,6 +1,6 @@
 %define name	rezound
 %define version 0.12.3
-%define release %mkrel 5
+%define release %mkrel 6
 
 Summary:	Audio Editing Package
 Name:		%{name}
