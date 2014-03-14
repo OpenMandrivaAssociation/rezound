@@ -18,7 +18,8 @@ Patch2:     11_gcc_4.3.patch
 Patch3:     rezound-0.12.3beta-fix-gcc44.patch
 BuildRequires:  libvorbis-devel
 BuildRequires:  fox1.6-devel
-BuildRequires:  libaudiofile-devel flex
+BuildRequires:  audiofile-devel
+BuildRequires:	flex
 BuildRequires:  pkgconfig(jack)
 BuildRequires:  fftw2-devel
 BuildRequires:  libflac++-devel
