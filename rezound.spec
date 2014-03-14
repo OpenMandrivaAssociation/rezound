@@ -22,7 +22,7 @@ BuildRequires:  audiofile-devel
 BuildRequires:	flex
 BuildRequires:  pkgconfig(jack)
 BuildRequires:  fftw2-devel
-BuildRequires:  libflac++-devel
+BuildRequires:  flac++-devel
 BuildRequires:  soundtouch-devel
 BuildRequires:  bison >= 1.875-3mdk
 
