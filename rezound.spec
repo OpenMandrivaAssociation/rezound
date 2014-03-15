@@ -15,6 +15,7 @@ BuildRequires:  fftw2-devel
 BuildRequires:  flac++-devel
 BuildRequires:  soundtouch-devel
 BuildRequires:  bison >= 1.875-3mdk
+BuildRequires:	autoconf
 
 %description
 ReZound aims to be a stable, open source, and graphical audio file editor
@@ -23,6 +24,9 @@ primarily for but not limited to the Linux operating system.
 %prep
 
 %setup -q -n %name-%{version}beta
+perl -p -i -e 's/AM_GNU_GETTEXT_VERSION\(\[0.11.5\]\)/AM_GNU_GETTEXT_VERSION([0.14.4])/' configure.ac
+touch NEWS AUTHORS
+autoreconf -fiv
 
 %build
 LDFLAGS="-lX11 -ldl" %configure2_5x --disable-portaudio
