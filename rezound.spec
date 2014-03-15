@@ -17,6 +17,7 @@ BuildRequires:  soundtouch-devel
 BuildRequires:  bison >= 1.875-3mdk
 BuildRequires:	autoconf
 BuildRequires:	gettext-devel
+BuildRequires:	boost-devel
 
 %description
 ReZound aims to be a stable, open source, and graphical audio file editor
