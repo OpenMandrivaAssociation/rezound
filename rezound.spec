@@ -56,8 +56,6 @@ EOF
 
 %find_lang %name
 
-%clean
-rm -rf %buildroot/
 
 %files -f %name.lang
 %defattr(-,root,root)
