@@ -1,41 +1,53 @@
+%define date 20220926
 Summary:    Audio Editing Package
 Name:       rezound
-Version:    0.13.1
-Release:    2
+Version:    0.13.2
+Release:    %{?date:0.%{date}.}1
 License:    GPLv2+
 Group:      Sound
 URL:        http://rezound.sourceforge.net/
-Source0:    http://prdownloads.sourceforge.net/rezound/%{name}-%{version}beta.tar.gz
+Source0:    https://github.com/ddurham2/rezound/archive/refs/heads/master.tar.gz#/%{name}-%{date}.tar.gz
+Patch0:     rezound-fox-1.7.patch
 BuildRequires:  libvorbis-devel
-BuildRequires:  fox1.6-devel
+BuildRequires:  pkgconfig(fox17)
 BuildRequires:  audiofile-devel
 BuildRequires:	flex
 BuildRequires:  pkgconfig(jack)
-BuildRequires:  fftw2-devel
+BuildRequires:  fftw-devel
 BuildRequires:  flac++-devel
 BuildRequires:  soundtouch-devel
 BuildRequires:  bison >= 1.875-3mdk
-BuildRequires:	autoconf
 BuildRequires:	gettext-devel
 BuildRequires:	boost-devel
+BuildRequires:	cmake ninja
 
 %description
 ReZound aims to be a stable, open source, and graphical audio file editor
 primarily for but not limited to the Linux operating system.
 
 %prep
-
-%setup -q -n %name-%{version}beta
-perl -p -i -e 's/AM_GNU_GETTEXT_VERSION\(\[0.11.5\]\)/AM_GNU_GETTEXT_VERSION([0.14.4])/' configure.ac
-touch NEWS AUTHORS
-autoreconf -fiv
+%autosetup -p1 -n %name%{?date:-master}%{!?date:-%{version}}
+%cmake -G Ninja
 
 %build
-LDFLAGS="-lX11 -ldl" %configure2_5x --disable-portaudio
-%make
+export LD_LIBRARY_PATH=`pwd`/build/lib:$LD_LIBRARY_PATH
+%ninja_build -C build
 
 %install
-%makeinstall_std
+%ninja_install -C build
+
+# No point in packaging the google test stuff that's just
+# built to run autotests
+rm -rf %{buildroot}%{_includedir}/gmock \
+	%{buildroot}%{_includedir}/gtest \
+	%{buildroot}%{_libdir}/cmake/GTest \
+	%{buildroot}%{_libdir}/libgmock.so* \
+	%{buildroot}%{_libdir}/libgmock_main.so* \
+	%{buildroot}%{_libdir}/libgtest.so* \
+	%{buildroot}%{_libdir}/libgtest_main.so* \
+	%{buildroot}%{_libdir}/pkgconfig/gmock*.pc \
+	%{buildroot}%{_libdir}/pkgconfig/gtest*.pc
+
 mkdir -p %buildroot/%{_docdir}/%name-%version
 mv %buildroot%_prefix/doc/* %buildroot/%{_docdir}/%name-%version
 
@@ -63,4 +75,3 @@ EOF
 %{_datadir}/rezound
 %_datadir/applications/mandriva-%name.desktop
 %_docdir/%name-%version
-
