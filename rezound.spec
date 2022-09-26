@@ -11,6 +11,7 @@ BuildRequires:  libvorbis-devel
 BuildRequires:	qmake-qt6
 BuildRequires:  cmake(Qt6)
 BuildRequires:  cmake(Qt6Core)
+BuildRequires:  cmake(Qt6DBus)
 BuildRequires:  cmake(Qt6Gui)
 BuildRequires:  cmake(Qt6Widgets)
 BuildRequires:  audiofile-devel
@@ -30,7 +31,9 @@ primarily for but not limited to the Linux operating system.
 
 %prep
 %autosetup -p1 -n %name%{?date:-dev-qt}%{!?date:-%{version}}
-%cmake -G Ninja
+%cmake -G Ninja \
+	-DBUILD_GMOCK:BOOL=OFF \
+	-DFETCHCONTENT_FULLY_DISCONNECTED:BOOL=ON
 
 %build
 export LD_LIBRARY_PATH=`pwd`/build/lib:$LD_LIBRARY_PATH
