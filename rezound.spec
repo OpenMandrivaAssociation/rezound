@@ -23,6 +23,8 @@ BuildRequires:  soundtouch-devel
 BuildRequires:  bison >= 1.875-3mdk
 BuildRequires:	gettext-devel
 BuildRequires:	boost-devel
+BuildRequires:	pkgconfig(gmock)
+BuildRequires:	pkgconfig(gtest)
 BuildRequires:	cmake qt6-cmake ninja
 
 %description
