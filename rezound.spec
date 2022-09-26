@@ -6,10 +6,13 @@ Release:    %{?date:0.%{date}.}1
 License:    GPLv2+
 Group:      Sound
 URL:        http://rezound.sourceforge.net/
-Source0:    https://github.com/ddurham2/rezound/archive/refs/heads/master.tar.gz#/%{name}-%{date}.tar.gz
-Patch0:     rezound-fox-1.7.patch
+Source0:    https://github.com/ddurham2/rezound/archive/refs/heads/dev/qt.tar.gz#/%{name}-%{date}.tar.gz
 BuildRequires:  libvorbis-devel
-BuildRequires:  pkgconfig(fox17)
+BuildRequires:	qmake-qt6
+BuildRequires:  cmake(Qt6)
+BuildRequires:  cmake(Qt6Core)
+BuildRequires:  cmake(Qt6Gui)
+BuildRequires:  cmake(Qt6Widgets)
 BuildRequires:  audiofile-devel
 BuildRequires:	flex
 BuildRequires:  pkgconfig(jack)
@@ -19,14 +22,14 @@ BuildRequires:  soundtouch-devel
 BuildRequires:  bison >= 1.875-3mdk
 BuildRequires:	gettext-devel
 BuildRequires:	boost-devel
-BuildRequires:	cmake ninja
+BuildRequires:	cmake qt6-cmake ninja
 
 %description
 ReZound aims to be a stable, open source, and graphical audio file editor
 primarily for but not limited to the Linux operating system.
 
 %prep
-%autosetup -p1 -n %name%{?date:-master}%{!?date:-%{version}}
+%autosetup -p1 -n %name%{?date:-dev-qt}%{!?date:-%{version}}
 %cmake -G Ninja
 
 %build
