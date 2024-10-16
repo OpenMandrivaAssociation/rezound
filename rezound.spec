@@ -5,7 +5,7 @@ Version:    0.13.2
 Release:    %{?date:0.%{date}.}1
 License:    GPLv2+
 Group:      Sound
-URL:        http://rezound.sourceforge.net/
+URL:        https://rezound.sourceforge.net/
 Source0:    https://github.com/ddurham2/rezound/archive/refs/heads/dev/qt.tar.gz#/%{name}-%{date}.tar.gz
 BuildRequires:  libvorbis-devel
 BuildRequires:	qmake-qt6
